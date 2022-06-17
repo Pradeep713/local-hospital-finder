@@ -1,6 +1,5 @@
-from http.client import REQUEST_HEADER_FIELDS_TOO_LARGE
 from django.shortcuts import redirect, render
-
+from django.db.models import Q
 from base.models import City, Mandal, Hospital
 from .forms import HospitalForm
 
@@ -17,10 +16,16 @@ def nearbyHospitals(request):
     form = HospitalForm()
     if request.method == 'POST':
         form = HospitalForm(request.POST)
-        data = Hospital.objects.filter(cityName_id = request.POST.get('cityName'))
-        context = {"data" : data}
-        print(data)
-        return render(request, "base/hospitals.html", context)
+        if form.is_valid():
+            data = Hospital.objects.filter(
+                Q(cityName_id = request.POST.get('cityName')) &
+                Q(treatmentName = request.POST.get('treatmentName'))
+            )
+            context = {"data" : data}
+            return render(request, "base/hospitals.html", context)
+        else:
+            print(form.errors)
+            return render(request, "base/hospitals.html")
     context = {"form" : form}
     return render(request, "base/nearbyhospitals.html", context)
 
@@ -36,5 +41,15 @@ def loadCities(request):
     context = {"data" : cities, "isCity" : True}
     return render(request, "base/dropdownlist.html", context)
 
-def loadHospitals(request):
-    pass
+def createHospital(request):
+    form = HospitalForm()
+    if request.method == 'POST':
+        form = HospitalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "base/home.html")
+        else:
+            print(form.errors)
+            return render(request, "base/home.html")
+    context = {"form" : form}
+    return render(request, "base/createHospital.html", context)
