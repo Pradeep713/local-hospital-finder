@@ -67,10 +67,22 @@ def nearbyHospitals(request):
     if request.method == 'POST':
         form = HospitalForm(request.POST)
         if form.is_valid():
-            data = Hospital.objects.filter(
+            data = list(Hospital.objects.filter(
                 Q(cityName_id = request.POST.get('cityName')) &
                 Q(treatmentName = request.POST.get('treatmentName'))
-            )
+            ))
+            if not data:
+                data = list(Hospital.objects.filter(
+                    Q(cityName_id = request.POST.get('mandalName')) &
+                    Q(treatmentName = request.POST.get('treatmentName'))
+                ))
+                if not data:
+                    data = list(Hospital.objects.filter(
+                        Q(cityName_id = request.POST.get('districtName')) &
+                        Q(treatmentName = request.POST.get('treatmentName'))
+                    ))
+                    if not data:
+                        data = "Not available hospitals in your district. Try single treatment at a time if you choose many"
             context = {"data" : data}
             return render(request, "base/hospitals.html", context)
         else:

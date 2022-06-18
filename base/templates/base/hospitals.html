@@ -1,4 +1,11 @@
+<!--    TODO: Serious Resizing/relocation of data needed Much attention
+        After Resizing Delete this comment    -->
+
 <h1>Hospitals page</h1>
 {% for it in data %}
     <h4>{{it.hospitalName}}</h4>
+    {% for t in it.treatmentName.all %}
+        <h6>{{t}}</h6>
+    {% endfor %}
+    <br>
 {% endfor %}
