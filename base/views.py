@@ -20,7 +20,7 @@ def loginUser(request):
     
     page = 'login'
     if request.method == 'POST':
-        userExist = False
+        userExist = True
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
         try:
