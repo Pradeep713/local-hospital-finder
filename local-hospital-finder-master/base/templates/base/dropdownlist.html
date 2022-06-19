@@ -1,8 +1,0 @@
-<option value="">------</option>
-{% for item in data %}
-    {% if isCity %}
-        <option value="{{ item.pk }}">{{ item.cityName }}</option>
-    {% else %}
-        <option value="{{ item.pk }}">{{ item.mandalName }}</option>
-    {% endif %}
-{% endfor %}
