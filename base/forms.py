@@ -14,6 +14,10 @@ class HospitalForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['districtName'].required = True
+        self.fields['mandalName'].required = True
+        self.fields['cityName'].required = True
+        self.fields['treatmentName'].required = False
         self.fields['cityName'].queryset = City.objects.none()
         self.fields['mandalName'].queryset = Mandal.objects.none()
 
