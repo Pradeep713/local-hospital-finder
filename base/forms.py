@@ -48,11 +48,6 @@ class HospitalForm(ModelForm):
 class UserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     # Should add choice field to UserCreationField
-    CHOICES = [
-        ("User", "User"),
-        ("Hospital", "Hospital")
-    ]
-    choice = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=True)
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")

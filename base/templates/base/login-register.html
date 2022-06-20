@@ -149,8 +149,6 @@
 </head>
 
 <body>
-    {% include "base/navbar.html" %}
-    <h1>Test</h1>
 
     <h1>
         <center>AP HEALTH</center>
@@ -167,11 +165,12 @@
                 </div>
                 <form class="login-form" method="POST" action="" id="hospital-form">
                     {% csrf_token %}
-                    <input type="text" placeholder="Username" aria-required="true" />
-                    <input type="password" placeholder="Password" aria-required="true" />
-                    <div class="button">
-                        <button><a href="{% url 'login' %}" style="color: gold;">login</a></button>
-                    </div>
+                    <input type="text" name = "username" placeholder="Enter Username" aria-required="true" />
+                    <input type="password" name = "password" placeholder="Enter Password" aria-required="true" />
+                    <!-- <div class="button"> -->
+                        <!-- <button><a href="{% url 'login' %}" style="color: gold;">login</a></button> -->
+                        <input type="submit" value="Submit" />
+                    <!-- </div> -->
                     <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p>
                 </form>
             </div>
@@ -180,10 +179,11 @@
         <div class="container">
             <form method="post" action="">
                 {% csrf_token %}
-                Username: {{form.username}}<br>
+                {{form.as_p}}
+                <!-- Username: {{form.username}}<br>
                 Email: {{form.email}}<br>
                 Password: {{form.password1}}<br>
-                Password confirmation: {{form.password2}}<br>
+                Password confirmation: {{form.password2}}<br> -->
                 <input type="submit" value="Register!" />
                 <!--
                 <h1>Sign Up</h1>
