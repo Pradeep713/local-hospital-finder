@@ -1,6 +1,6 @@
 {% include "base/navbar.html" %}
 
-{% if page == 'login' %}
+<!-- {% if page == 'login' %}
 <div>
     <form method="post" action="">
         {% csrf_token %}
@@ -22,4 +22,177 @@
     <p>Already has a account</p>
     <a href="{% url 'login' %}">Login</a>
 </div>
-{% endif %}
+{% endif %} -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=9.0">
+        <title>AP Health</title>
+        <style>
+            header .header {
+                background-color: #fff;
+                height: 45px;
+            }
+
+            header a img {
+                width: 134px;
+                margin-top: 4px;
+            }
+
+            .login-page {
+                width: 360px;
+                padding: 8% 0 0;
+                margin: auto;
+            }
+
+            .login-page .form .login {
+                margin-top: -31px;
+                margin-bottom: 26px;
+                border-radius: 15px;
+            }
+
+            .form {
+                position: relative;
+                z-index: 1;
+                background: #FFFFFF;
+                max-width: 360px;
+                margin: 0 auto 100px;
+                padding: 45px;
+                text-align: center;
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                border-radius: 15px;
+            }
+
+            .form input {
+                font-family: "Roboto", sans-serif;
+                outline: 0;
+                background: #f2f2f2;
+                width: 100%;
+                border: 0;
+                margin: 0 0 15px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+
+            .form button {
+                font-family: "Roboto", sans-serif;
+                text-transform: uppercase;
+                outline: 0;
+                background-color: #328f8a;
+                background-image: linear-gradient(45deg, #328f8a, #08ac4b);
+                width: 100%;
+                border: 0;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+                border-radius: 50px;
+            }
+
+            .form .message {
+                margin: 15px 0 0;
+                color: #b3b3b3;
+                font-size: 12px;
+            }
+
+            .form .message a {
+                color: #4CAF50;
+                text-decoration: none;
+            }
+
+            .container {
+                position: relative;
+                z-index: 1;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            body {
+                background-color: #328f8a;
+                background-image: linear-gradient(45deg, #328f8a, #08ac4b);
+                font-family: "Roboto", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        </style>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    </head>
+                    
+    <body>
+    {% include "base/navbar.html" %}
+        <h1>Test</h1>
+
+    <h1>
+        <center>AP HEALTH</center>
+    </h1>
+    {% if page == 'login' %}
+    <div class="container">
+        <div class="login-page">
+            <div class="form">
+                <div class="login">
+                    <div class="login-header">
+                        <h3>LOGIN</h3>
+                        <p>Please enter your credentials to login.</p>
+                    </div>
+                </div>
+                <form class="login-form" method="POST" action="" id="hospital-form">
+                {% csrf_token %}
+                    <input type="text" placeholder="username" aria-required="true" />
+                    <input type="password" placeholder="password" aria-required="true" />
+                    <div class="button">
+                        <button><a href="{% url 'login' %}">login</a></button>
+                    </div>
+                    <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Register!" />
+
+                <h1>Sign Up</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                </label>
+
+                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn">Cancel</button>
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <p></p>
+    {% endif %}
+    </body>
+
+</html>

@@ -108,6 +108,7 @@ def createHospital(request):
     form = HospitalForm()
     if request.method == 'POST':
         form = HospitalForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return render(request, "base/home.html")
